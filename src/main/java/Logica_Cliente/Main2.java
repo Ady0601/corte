@@ -35,18 +35,22 @@ public class Main2 {
         int bandera=0;
         int retorno=0;
         int retornoce=0;
-        
+        int Promedio_edad=0;
       
         //Crear objetos 
         Empleado objempleado;
         ArrayList<Empleado>listaempleados=new ArrayList<>();
         ArrayList<Empleado>listacorreos=new ArrayList<>();
-        
         JOptionPane.showMessageDialog(null, listacorreos, "Informacion de correos", 1);
-
-                        //Scanner 
+        //Scanner 
         Scanner scan = new Scanner(System.in);
-        
+        //empleados.
+        Empleado objempleado2 = new Empleado ("Fernando", "1001", "grueso", "ronalfernando@gmail.com", 2012);
+        Empleado objempleado3 = new Empleado ("Jhon", "1002", "quintero", "jhonquintero@gmail.com", 2018);
+        Empleado objempleado4 = new Empleado ("Ady", "1003", "Quinayas", "adyquinayas@gmail.com", 2010);
+        listaempleados.add(objempleado2);
+        listaempleados.add(objempleado3);
+        listaempleados.add(objempleado4);
         do{
             //Opciones
             System.out.println("**********Menu de opciones**********");
@@ -59,7 +63,6 @@ public class Main2 {
             System.out.println("7. Salir");
             System.out.println("Digite su opcion");
             opcion=scan.nextInt();
-        
             
             switch(opcion){
                 //Registrar
@@ -68,12 +71,9 @@ public class Main2 {
                     scan.nextLine();
                     Num_Empleados= scan.nextInt();
                    
-                    if(Num_Empleados<0){System.out.println("El numero debe ser mayor a 0"); 
-                    }
-                    
+                    if(Num_Empleados<0){System.out.println("El numero debe ser mayor a 0");}
                     if(Num_Empleados>0){
                         for (int i = 0; i < Num_Empleados; i++) {
-                        
                         
                             scan.nextLine();
                             System.out.println("Digite el nombre del empleado");
@@ -85,7 +85,6 @@ public class Main2 {
                             retorno=RetornarValor(Nombre);
                             retornoce=RetornarCE(Nombre);
                             }
-                            
                             retorno=RetornarValor(Nombre);
                             retornoce=RetornarCE(Nombre);
                             
@@ -96,7 +95,7 @@ public class Main2 {
                             retornoce=RetornarCE(Nombre);
                             }
                         
-                          System.out.println("Digite el apellido del empleado");
+                            System.out.println("Digite el apellido del empleado");
                             Apellido=scan.nextLine();
                             
                             while(Apellido.equals("")){
@@ -105,7 +104,6 @@ public class Main2 {
                             retorno=RetornarValor1(Apellido);
                             retornoce=RetornarCE1(Apellido);
                             }
-                            
                             retorno=RetornarValor1(Apellido);
                             retornoce=RetornarCE1(Apellido);
                             
@@ -123,7 +121,11 @@ public class Main2 {
                             System.out.println("Digite el codigo del empleado");
                             Codigo= scan.nextLine();
                             }
-                            
+                            while (listaempleados.get(i).getCodigo().equals(Id)){
+                            System.out.println("El codigo del empleado ya existe");  
+                            System.out.println("Digite el codigo del empleado");
+                            Codigo= scan.nextLine();
+                            }
                             System.out.println("Digite el correo del empleado");
                             Correo= scan.nextLine() ;
                             
@@ -139,18 +141,13 @@ public class Main2 {
                             while(Año_Ingreso>1993 ^ Año_Ingreso<2023|| Nombre.equals("")){
                             System.out.println("Digite el año de ingreso del empleado");
                             Año_Ingreso = scan.nextInt();
-                            }   
+                            }
                         
                          objempleado = new Empleado (Nombre, Codigo, Apellido, Correo, Año_Ingreso);
                             listaempleados.add(objempleado);
                           
-                        
-                            
                             System.out.println("Empleado creado");
-                            
-                            
-                        }
-                        
+                            }
                     } 
                     
                     break;
@@ -258,49 +255,34 @@ public class Main2 {
                         }
                      break;
                      
-              case 6://Salir
+              case 6:
                 case 7:
-                      
-                    System.out.println("Operacion cancelada");
+                      //Salir
+                    System.out.println("Operacion erminada con exito");
+                    
                     break;
                     
                 default:
                     System.out.println("Opcion no valida");
-                    
-              
-               {
-                    
-                         
-                 
-               }
-             
-                    
-            }
-            }while(opcion!=6);
-                
-        }
-                public static int RetornarValor(String Nombre){
-                    int Letra=0;
-                    int Numero=0;
-                    
-                    for (int i=0; i<Nombre.length();i++){
-                        boolean bandera=Character.isDigit(Nombre.charAt(i));
-                        if(bandera)
-                        {    
-                            System.out.println("Es un numero"+Nombre.charAt(i));
-                            Numero++;
-                        }else
-                        {
-                            System.out.println("Es una letra "+Nombre.charAt(i));
-                            Letra++;
-                        }
-                    
-                            
-                    }
-                    return Numero;    
                 }
+            }while(opcion!=7);
+        }
+public static int RetornarValor(String Nombre){
+int Letra=0;
+int Numero=0;
+                    
+for (int i=0; i<Nombre.length();i++){
+    boolean bandera=Character.isDigit(Nombre.charAt(i));
+         if(bandera){    
+            System.out.println("Es un numero"+Nombre.charAt(i));
+             Numero++;}
+         else{System.out.println("Es una letra "+Nombre.charAt(i));
+              Letra++;}
+}
+return Numero;    
+}
                 
-                public static int RetornarCE(String Nombre)
+public static int RetornarCE(String Nombre)
     {
         int ce=0;
 
@@ -309,40 +291,22 @@ public class Main2 {
              if(!flag) {
                 System.out.println("'"+ Nombre.charAt(j)+"' is a caracter special");
                 if(Nombre.charAt(j)=='@')
-                {
-                    ce++;
-                }
+                {ce++;}
                  if(Nombre.charAt(j)=='~')
-                {
-                    ce++;
-                }
+                {ce++;}
                  if(Nombre.charAt(j)=='/')
-                {
-                    ce++;
-                }
+                { ce++;}
                  if(Nombre.charAt(j)==';')
-                {
-                    ce++;
-                }
+                {ce++;}
                  if(Nombre.charAt(j)==':')
-                {
-                    ce++;
-                }
+                { ce++;}
                  if(Nombre.charAt(j)=='"')
-                {
-                    ce++;
-                }
+                {ce++;}
                  if(Nombre.charAt(j)=='!')
-                {
-                    ce++;
-                }
+                {ce++;}
                   if(Nombre.charAt(j)==' ')
-                {
-                    ce++;
-                }
+                {ce++;}
              }
-           
-
         }
         return ce;
     }
@@ -361,16 +325,13 @@ public class Main2 {
                         {
                             System.out.println("Es una letra "+Apellido.charAt(i));
                             Letra++;
-                        }
-                    
-                            
+                        }    
                     }
-                    return Numero;    
-                }
+ return Numero;    
+}
     
     
-    public static int RetornarCE1(String Apellido)
-    {
+    public static int RetornarCE1(String Apellido){
         int ce=0;
 
         for (int j = 0; j < Apellido.length(); j++) {
@@ -413,10 +374,20 @@ public class Main2 {
         }
         return ce;
     }
-        
+public static int VerificarCodigo(ArrayList<Empleado> listaempleados, String codigo)
+    {
+        int bandera=0;
+        for (int i = 0; i < listaempleados.size(); i++) {
+           
+            if(listaempleados.get(i).getCodigo().equals(codigo))
+            {
+                bandera=1;
+            }
+            else
+            {
+                bandera=0;
+            }
+        }
+        return  bandera;
+    }
 }
-    
-  
-    
-    
-
