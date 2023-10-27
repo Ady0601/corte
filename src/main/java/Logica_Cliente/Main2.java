@@ -4,8 +4,10 @@
  */
 package Logica_Cliente;
 
+
 import Logica_Negocio.Empleado;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -35,22 +37,20 @@ public class Main2 {
         int bandera=0;
         int retorno=0;
         int retornoce=0;
-        int Promedio_edad=0;
+        int retorno_c=0;
+        int año_actual=2023;
+        int años_empresa=0;
       
         //Crear objetos 
-        Empleado objempleado;
+        
         ArrayList<Empleado>listaempleados=new ArrayList<>();
         ArrayList<Empleado>listacorreos=new ArrayList<>();
+       
+        
         JOptionPane.showMessageDialog(null, listacorreos, "Informacion de correos", 1);
-        //Scanner 
+        
         Scanner scan = new Scanner(System.in);
-        //empleados.
-        Empleado objempleado2 = new Empleado ("Fernando", "1001", "grueso", "ronalfernando@gmail.com", 2012);
-        Empleado objempleado3 = new Empleado ("Jhon", "1002", "quintero", "jhonquintero@gmail.com", 2018);
-        Empleado objempleado4 = new Empleado ("Ady", "1003", "Quinayas", "adyquinayas@gmail.com", 2010);
-        listaempleados.add(objempleado2);
-        listaempleados.add(objempleado3);
-        listaempleados.add(objempleado4);
+        
         do{
             //Opciones
             System.out.println("**********Menu de opciones**********");
@@ -59,8 +59,9 @@ public class Main2 {
             System.out.println("3. Buscar empleado");
             System.out.println("4. Listar empleado");
             System.out.println("5. Eliminar empleado");
-            System.out.println("6. Tiempo de trabajo del empleado");
-            System.out.println("7. Salir");
+            System.out.println("6. mostrar correos empleados");
+            System.out.println("7. promedio de tiempo en la empresa");
+            System.out.println("8. salir");
             System.out.println("Digite su opcion");
             opcion=scan.nextInt();
             
@@ -116,34 +117,30 @@ public class Main2 {
                             
                             System.out.println("Digite el codigo del empleado");
                             Codigo= scan.nextLine() ;
-                            
+                           
                             while(Codigo.equals("")){
                             System.out.println("Digite el codigo del empleado");
                             Codigo= scan.nextLine();
                             }
-                            while (listaempleados.get(i).getCodigo().equals(Id)){
-                            System.out.println("El codigo del empleado ya existe");  
-                            System.out.println("Digite el codigo del empleado");
-                            Codigo= scan.nextLine();
-                            }
-                            System.out.println("Digite el correo del empleado");
-                            Correo= scan.nextLine() ;
-                            
-                            while(Correo.equals("")){
-                            System.out.println("Digite el correo del empleado");
-                             Correo=JOptionPane.showInputDialog(null, "Digite el correo del empleado", "Correo", 1);
-        
-                          
-                            }
-                            
+                            retorno_c = VerificarCodigo(listaempleados, Codigo);
+                            while (retorno_c == 1) {
+                            System.out.println("El código ya existe. Ingrese un código diferente");
+                            Codigo = scan.nextLine();
+                            retorno_c = VerificarCodigo(listaempleados, Codigo);
+                            } 
                             System.out.println("Digite el año de ingreso del empleado");
                             Año_Ingreso= scan.nextInt();
                             while(Año_Ingreso>1993 ^ Año_Ingreso<2023|| Nombre.equals("")){
                             System.out.println("Digite el año de ingreso del empleado");
                             Año_Ingreso = scan.nextInt();
                             }
-                        
-                         objempleado = new Empleado (Nombre, Codigo, Apellido, Correo, Año_Ingreso);
+                            System.out.println("Digite el correo del empleado"+i);
+                            Correo= scan.nextLine() ;
+                            
+                            while(Correo.equals("")){
+                            System.out.println("Digite el correo del empleado");
+                             Correo=JOptionPane.showInputDialog(null, "Digite el correo del empleado", "Correo", 1);}
+                        Empleado objempleado = new Empleado (Nombre, Codigo, Apellido, Correo, Año_Ingreso);
                             listaempleados.add(objempleado);
                           
                             System.out.println("Empleado creado");
@@ -185,7 +182,11 @@ public class Main2 {
                                 
                                 listaempleados.get(i).setAño_Ingreso(Año_Ingreso);
                                 System.out.println("Empleado editado ");
-                            }      
+                            }else{
+                               while(Codigo.equals("")){
+                            System.out.println("Codigo no encontrado. Porfavor prube otro codigo");}
+                            Codigo= scan.nextLine();       
+                        }
                         }
                 break;
                 //Buscar
@@ -255,17 +256,34 @@ public class Main2 {
                         }
                      break;
                      
-              case 6:
+                case 6:
+                  //Mostrar la lista de correos electrónicos
+                  System.out.println("***Correos***");
+                    String correos = ConcatenarCorreos(listaempleados);
+                    System.out.println(correos);
+                  break;
                 case 7:
-                      //Salir
-                    System.out.println("Operacion erminada con exito");
-                    
+                     // Obtener la lista de empleados
+                     ArrayList<Empleado> empleados = listaempleados;
+
+                    // Obtener el año actual
+                    int añoActual = Calendar.getInstance().get(Calendar.YEAR);
+
+                    // Calcular el promedio de edad
+                    double promedioEdad = PromedioEdad(empleados, añoActual);
+
+                    // Imprimir el promedio de edad
+                    System.out.println("El promedio de años en la empresa de los empleados es de " + promedioEdad);
+
                     break;
-                    
+                case 8:
+                    //Salir
+                    System.out.println("Operacion erminada con exito");
+                    break;
                 default:
                     System.out.println("Opcion no valida");
                 }
-            }while(opcion!=7);
+            }while(opcion!=8);
         }
 public static int RetornarValor(String Nombre){
 int Letra=0;
@@ -329,9 +347,7 @@ public static int RetornarCE(String Nombre)
                     }
  return Numero;    
 }
-    
-    
-    public static int RetornarCE1(String Apellido){
+public static int RetornarCE1(String Apellido){
         int ce=0;
 
         for (int j = 0; j < Apellido.length(); j++) {
@@ -374,6 +390,17 @@ public static int RetornarCE(String Nombre)
         }
         return ce;
     }
+
+public static String ConcatenarCorreos(ArrayList<Empleado> listaempleados)
+    {
+        String concatenar="";
+       
+         for (int i = 0; i < listaempleados.size(); i++) {
+             concatenar+=listaempleados.get(i).getCorreo()+"\n";
+         }
+         
+         return concatenar;
+    }
 public static int VerificarCodigo(ArrayList<Empleado> listaempleados, String codigo)
     {
         int bandera=0;
@@ -390,4 +417,20 @@ public static int VerificarCodigo(ArrayList<Empleado> listaempleados, String cod
         }
         return  bandera;
     }
+public static double PromedioEdad(ArrayList<Empleado> listaempleados, int añoActual) {
+
+    // Declarar variables
+    int totalEmpleados = listaempleados.size();
+    int sumaEdad = 0;
+
+    // Calcular la suma de los años de ingreso
+    for (Empleado empleado : listaempleados) {
+        sumaEdad += añoActual - empleado.getAño_Ingreso();
+    }
+
+    // Calcular el promedio
+    double promedioEdad = (double) sumaEdad / totalEmpleados;
+
+    return promedioEdad;
+}
 }
