@@ -55,19 +55,19 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Nombre");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(40, 50, 180, 60);
+        jLabel1.setBounds(20, 50, 180, 60);
 
         jLabel2.setFont(new java.awt.Font("Ravie", 3, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 153, 153));
         jLabel2.setText("Codigo");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(60, 90, 140, 60);
+        jLabel2.setBounds(20, 110, 140, 40);
 
         jLabel3.setFont(new java.awt.Font("Ravie", 3, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 153, 153));
         jLabel3.setText("Año Ingreso");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 140, 210, 60);
+        jLabel3.setBounds(10, 150, 210, 40);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Ravie", 3, 12)); // NOI18N
@@ -79,19 +79,19 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(150, 220, 120, 24);
+        jButton1.setBounds(140, 250, 120, 24);
 
         jTextField1.setBackground(new java.awt.Color(255, 204, 204));
         jTextField1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(180, 60, 149, 30);
+        jTextField1.setBounds(220, 70, 149, 30);
 
         jTextField2.setBackground(new java.awt.Color(255, 204, 204));
         jTextField2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(102, 102, 102));
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(181, 107, 149, 30);
+        jTextField2.setBounds(220, 110, 149, 30);
 
         jTextField3.setBackground(new java.awt.Color(255, 204, 204));
         jTextField3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
@@ -99,7 +99,6 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
         getContentPane().add(jTextField3);
         jTextField3.setBounds(220, 150, 149, 30);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Equipo\\OneDrive\\Escritorio\\3.jpg")); // NOI18N
         jLabel4.setText("jLabel4");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(-3, -4, 400, 390);

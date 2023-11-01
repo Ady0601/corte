@@ -4,6 +4,8 @@
  */
 package Logica_Negocio;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ady
@@ -89,6 +91,32 @@ public class Empleado {
     }
     
 
+public static String ConcatenarCorreos(ArrayList<Empleado> listaempleados)
+    {
+        String concatenar="";
+       
+         for (int i = 0; i < listaempleados.size(); i++) {
+             concatenar+=listaempleados.get(i).getCorreo()+"\n";
+         }
+         
+         return concatenar;
+    }
+public static int VerificarCodigo(ArrayList<Empleado> listaempleados, String codigo)
+    {
+        int bandera=0;
+        for (int i = 0; i < listaempleados.size(); i++) {
+           
+            if(listaempleados.get(i).getCodigo().equals(codigo))
+            {
+                bandera=1;
+            }
+            else
+            {
+                bandera=0;
+            }
+        }
+        return  bandera;
+    }
   
    
     }

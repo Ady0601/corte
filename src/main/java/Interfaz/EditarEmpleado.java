@@ -5,7 +5,9 @@
 package Interfaz;
 
 import Logica_Negocio.Empleado;
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -128,10 +130,14 @@ public class EditarEmpleado extends javax.swing.JFrame {
         jTextField4.setBackground(new java.awt.Color(255, 204, 204));
         jTextField4.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jTextField4.setForeground(new java.awt.Color(102, 102, 102));
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextField4);
         jTextField4.setBounds(135, 44, 122, 30);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Equipo\\OneDrive\\Escritorio\\4.jpg")); // NOI18N
         jLabel4.setText("jLabel4");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(-3, -4, 400, 400);
@@ -141,6 +147,16 @@ public class EditarEmpleado extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     String codigob=jTextField4.getText();
+    int bandera=0;
+    
+        if(jTextField4.getText().equals("")){
+            jTextField4.setBorder(new LineBorder(Color.RED,2));
+            bandera=1;
+            
+        }
+    if (bandera==0){
+        
+    
         for (int i = 0; i < listaempleado.size(); i++) {
             if(codigob.equals(listaempleado.get(i).getCodigo()))
             {
@@ -149,9 +165,11 @@ public class EditarEmpleado extends javax.swing.JFrame {
                 jTextField3.setText(String.valueOf(listaempleado.get(i).getAño_Ingreso()));
             }
         }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    
         
         String nombre= jTextField1.getText();
         String codigo= jTextField2.getText();
@@ -165,19 +183,24 @@ public class EditarEmpleado extends javax.swing.JFrame {
                     listaempleado.get(i).setNombre(nombre);
                     listaempleado.get(i).setCodigo(codigo);
                     listaempleado.get(i).setAño_Ingreso(año_ingreso);
+                
                 }
-            }
             
-        }
+                }
         
+        }
         MenuAdministrador menu = new MenuAdministrador();
         menu.setListaempleados(listaempleado);
         menu.setVisible(true);
         dispose();
-        
+                
     }//GEN-LAST:event_jButton2ActionPerformed
 
-  
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+       
     /**
      * @param args the command line arguments
      */

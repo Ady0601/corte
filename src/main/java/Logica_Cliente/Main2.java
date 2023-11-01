@@ -6,6 +6,7 @@ package Logica_Cliente;
 
 
 import Logica_Negocio.Empleado;
+import Logica_Negocio.Helper;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
@@ -48,7 +49,6 @@ public class Main2 {
         ArrayList<Empleado>listacorreos=new ArrayList<>();
        
         
-        JOptionPane.showMessageDialog(null, listacorreos, "Informacion de correos", 1);
         
         Scanner scan = new Scanner(System.in);
         
@@ -96,17 +96,17 @@ public class Main2 {
                             while(Nombre.equals("")){
                             System.out.println("Digite el nombre del empleado");
                             Nombre= scan.nextLine();
-                            retorno=RetornarValor(Nombre);
-                            retornoce=RetornarCE(Nombre);
+                            retorno=Helper.RetornarValor(Nombre);
+                            retornoce=Helper.RetornarCE(Nombre);
                             }
-                            retorno=RetornarValor(Nombre);
-                            retornoce=RetornarCE(Nombre);
+                            retorno=Helper.RetornarValor(Nombre);
+                            retornoce=Helper.RetornarCE(Nombre);
                             
                            while (retorno !=0 || Nombre.equals("") || retornoce !=0) {
                             System.out.println("Digite el nombre del empleado");
                             Nombre=scan.nextLine();
-                            retorno=RetornarValor(Nombre);
-                            retornoce=RetornarCE(Nombre);
+                            retorno=Helper.RetornarValor(Nombre);
+                            retornoce=Helper.RetornarCE(Nombre);
                             }
                         
                             System.out.println("Digite el apellido del empleado");
@@ -115,17 +115,17 @@ public class Main2 {
                             while(Apellido.equals("")){
                             System.out.println("Digite el apellido del empleado");
                             Apellido= scan.nextLine();
-                            retorno=RetornarValor1(Apellido);
-                            retornoce=RetornarCE1(Apellido);
+                            retorno=Helper.RetornarValor1(Apellido);
+                            retornoce=Helper.RetornarCE1(Apellido);
                             }
-                            retorno=RetornarValor1(Apellido);
-                            retornoce=RetornarCE1(Apellido);
+                            retorno=Helper.RetornarValor1(Apellido);
+                            retornoce=Helper.RetornarCE1(Apellido);
                             
                             while (retorno !=0 || Apellido.equals("") || retornoce !=0) {
                             System.out.println("Digite el apellido del empleado");
                             Apellido=scan.nextLine();
-                            retorno=RetornarValor1(Apellido);
-                            retornoce=RetornarCE1(Apellido);
+                            retorno=Helper.RetornarValor1(Apellido);
+                            retornoce=Helper.RetornarCE1(Apellido);
                             }
                             
                             System.out.println("Digite el codigo del empleado");
@@ -135,11 +135,11 @@ public class Main2 {
                             System.out.println("Digite el codigo del empleado");
                             Codigo= scan.nextLine();
                             }
-                            retorno_c = VerificarCodigo(listaempleados, Codigo);
+                            retorno_c = Empleado.VerificarCodigo(listaempleados, Codigo);
                             while (retorno_c == 1) {
                             System.out.println("El código ya existe. Ingrese un código diferente");
                             Codigo = scan.nextLine();
-                            retorno_c = VerificarCodigo(listaempleados, Codigo);
+                            retorno_c = Empleado.VerificarCodigo(listaempleados, Codigo);
                             } 
                             System.out.println("Digite el año de ingreso del empleado");
                             Año_Ingreso= scan.nextInt();
@@ -197,7 +197,7 @@ public class Main2 {
                                 System.out.println("Empleado editado ");
                             }else{
                                while(Codigo.equals("")){
-                            System.out.println("Codigo no encontrado. Porfavor prube otro codigo");}
+                            System.out.println("Codigo no encontrado. Por favor pruebe otro codigo");}
                             Codigo= scan.nextLine();       
                         }
                         }
@@ -272,9 +272,11 @@ public class Main2 {
                 case 6:
                   //Mostrar la lista de correos electrónicos
                   System.out.println("***Correos***");
-                    String correos = ConcatenarCorreos(listaempleados);
+                    String correos = Empleado.ConcatenarCorreos(listaempleados);
                     System.out.println(correos);
                   break;
+                  
+                  
                 case 7:
                      // Obtener la lista de empleados
                      ArrayList<Empleado> empleados = listaempleados;
@@ -291,145 +293,14 @@ public class Main2 {
                     break;
                 case 8:
                     //Salir
-                    System.out.println("Operacion erminada con exito");
+                    System.out.println("Operacion terminada con exito");
                     break;
                 default:
                     System.out.println("Opcion no valida");
                 }
             }while(opcion!=8);
         }
-public static int RetornarValor(String Nombre){
-int Letra=0;
-int Numero=0;
-                    
-for (int i=0; i<Nombre.length();i++){
-    boolean bandera=Character.isDigit(Nombre.charAt(i));
-         if(bandera){    
-            System.out.println("Es un numero"+Nombre.charAt(i));
-             Numero++;}
-         else{System.out.println("Es una letra "+Nombre.charAt(i));
-              Letra++;}
-}
-return Numero;    
-}
-                
-public static int RetornarCE(String Nombre)
-    {
-        int ce=0;
 
-        for (int j = 0; j < Nombre.length(); j++) {
-             boolean flag = Character.isLetter(Nombre.charAt(j));
-             if(!flag) {
-                System.out.println("'"+ Nombre.charAt(j)+"' is a caracter special");
-                if(Nombre.charAt(j)=='@')
-                {ce++;}
-                 if(Nombre.charAt(j)=='~')
-                {ce++;}
-                 if(Nombre.charAt(j)=='/')
-                { ce++;}
-                 if(Nombre.charAt(j)==';')
-                {ce++;}
-                 if(Nombre.charAt(j)==':')
-                { ce++;}
-                 if(Nombre.charAt(j)=='"')
-                {ce++;}
-                 if(Nombre.charAt(j)=='!')
-                {ce++;}
-                  if(Nombre.charAt(j)==' ')
-                {ce++;}
-             }
-        }
-        return ce;
-    }
-
-  public static int RetornarValor1(String Apellido){
-                    int Letra=0;
-                    int Numero=0;
-                    
-                    for (int i=0; i<Apellido.length();i++){
-                        boolean bandera=Character.isDigit(Apellido.charAt(i));
-                        if(bandera)
-                        {    
-                            System.out.println("Es un numero"+Apellido.charAt(i));
-                            Numero++;
-                        }else
-                        {
-                            System.out.println("Es una letra "+Apellido.charAt(i));
-                            Letra++;
-                        }    
-                    }
- return Numero;    
-}
-public static int RetornarCE1(String Apellido){
-        int ce=0;
-
-        for (int j = 0; j < Apellido.length(); j++) {
-             boolean flag = Character.isLetter(Apellido.charAt(j));
-             if(!flag) {
-                System.out.println("'"+ Apellido.charAt(j)+"' is a caracter special");
-                if(Apellido.charAt(j)=='@')
-                {
-                    ce++;
-                }
-                 if(Apellido.charAt(j)=='~')
-                {
-                    ce++;
-                }
-                 if(Apellido.charAt(j)=='/')
-                {
-                    ce++;
-                }
-                 if(Apellido.charAt(j)==';')
-                {
-                    ce++;
-                }
-                 if(Apellido.charAt(j)==':')
-                {
-                    ce++;
-                }
-                 if(Apellido.charAt(j)=='"')
-                {
-                    ce++;
-                }
-                 if(Apellido.charAt(j)=='!')
-                {
-                    ce++;
-                }
-                  if(Apellido.charAt(j)==' ')
-                {
-                    ce++;
-                }
-             }
-        }
-        return ce;
-    }
-
-public static String ConcatenarCorreos(ArrayList<Empleado> listaempleados)
-    {
-        String concatenar="";
-       
-         for (int i = 0; i < listaempleados.size(); i++) {
-             concatenar+=listaempleados.get(i).getCorreo()+"\n";
-         }
-         
-         return concatenar;
-    }
-public static int VerificarCodigo(ArrayList<Empleado> listaempleados, String codigo)
-    {
-        int bandera=0;
-        for (int i = 0; i < listaempleados.size(); i++) {
-           
-            if(listaempleados.get(i).getCodigo().equals(codigo))
-            {
-                bandera=1;
-            }
-            else
-            {
-                bandera=0;
-            }
-        }
-        return  bandera;
-    }
 public static double PromedioEdad(ArrayList<Empleado> listaempleados, int añoActual) {
 
     // Declarar variables
