@@ -8,6 +8,7 @@ package Logica_Cliente;
 import Logica_Negocio.Empleado;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -62,15 +63,27 @@ public class Main2 {
             System.out.println("6. mostrar correos empleados");
             System.out.println("7. promedio de tiempo en la empresa");
             System.out.println("8. salir");
+            
+            try {
             System.out.println("Digite su opcion");
             opcion=scan.nextInt();
+            }
+            catch (InputMismatchException  e){
+                System.out.println("Opcion no valida");
+             break;   
+            }
             
             switch(opcion){
                 //Registrar
                 case 1:
+                    try{
                     System.out.println("Digite el numero de empleados a registrar");
-                    scan.nextLine();
                     Num_Empleados= scan.nextInt();
+                    }
+                    catch (InputMismatchException  e){
+                    System.out.println("Opcion no valida");
+                    break;   
+                    }
                    
                     if(Num_Empleados<0){System.out.println("El numero debe ser mayor a 0");}
                     if(Num_Empleados>0){
