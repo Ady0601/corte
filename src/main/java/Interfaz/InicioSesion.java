@@ -125,7 +125,7 @@ public void IniciarSesion()
     
     if(usuario!=null && contraseña!=null)
     {
-        if(usuario.equals("Jojan Cabezas")&&contraseña.equals("1059474339"))
+        if(usuario.equals("administrador")&&contraseña.equals("12345"))
         {
             System.out.println("Bienvenido");
             MenuAdministrador menu= new MenuAdministrador();
