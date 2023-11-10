@@ -6,6 +6,8 @@ package Logica_Cliente;
 
 
 import Logica_Negocio.Empleado;
+import static Logica_Negocio.Empleado.ConcatenarCorreos;
+import static Logica_Negocio.Empleado.calcularAñosServicioIndividual;
 import Logica_Negocio.Helper;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,14 +44,12 @@ public class Main2 {
         int retorno_c=0;
         int año_actual=2023;
         int años_empresa=0;
+        int retornocecorreo=0;
       
         //Crear objetos 
         
         ArrayList<Empleado>listaempleados=new ArrayList<>();
-        ArrayList<Empleado>listacorreos=new ArrayList<>();
        
-        
-        
         Scanner scan = new Scanner(System.in);
         
         do{
@@ -60,9 +60,10 @@ public class Main2 {
             System.out.println("3. Buscar empleado");
             System.out.println("4. Listar empleado");
             System.out.println("5. Eliminar empleado");
-            System.out.println("6. mostrar correos empleados");
-            System.out.println("7. promedio de tiempo en la empresa");
-            System.out.println("8. salir");
+            System.out.println("6. Promedio del timepo de los empleado en la empresa");
+            System.out.println("7. Concatenar correos");
+            System.out.println("8. Años del empleado en la empresa");
+          System.out.println("9. salir");
             
             try {
             System.out.println("Digite su opcion");
@@ -70,7 +71,8 @@ public class Main2 {
             }
             catch (InputMismatchException  e){
                 System.out.println("Opcion no valida");
-             break;   
+             break;
+             
             }
             
             switch(opcion){
@@ -109,6 +111,7 @@ public class Main2 {
                             retornoce=Helper.RetornarCE(Nombre);
                             }
                         
+                           //Apellido
                             System.out.println("Digite el apellido del empleado");
                             Apellido=scan.nextLine();
                             
@@ -127,7 +130,9 @@ public class Main2 {
                             retorno=Helper.RetornarValor1(Apellido);
                             retornoce=Helper.RetornarCE1(Apellido);
                             }
-                            
+                           
+                       //Codigo
+            
                             System.out.println("Digite el codigo del empleado");
                             Codigo= scan.nextLine() ;
                            
@@ -140,26 +145,38 @@ public class Main2 {
                             System.out.println("El código ya existe. Ingrese un código diferente");
                             Codigo = scan.nextLine();
                             retorno_c = Empleado.VerificarCodigo(listaempleados, Codigo);
-                            } 
+                            }
+                            //Correo
+                            System.out.println("Digite el correo del empleado");
+                            Correo=scan.nextLine();
+                            Correo=JOptionPane.showInputDialog(null, "Digite el correo del empleado", "Correo", 1);
+                            retornocecorreo=Helper.RetornarCECorreo(Correo);
+                            
+                            while(Correo.equals("")|| retornocecorreo!=0){
+                                System.out.println("Digite el correo del empleado");
+                            Correo=scan.nextLine();
+                            Correo=JOptionPane.showInputDialog(null, "Digite el correo del empleado", "Correo", 1);
+                            retornocecorreo=Helper.RetornarCECorreo(Correo);
+                            }
+                            }
+                         
+                         //Año ingreso   
                             System.out.println("Digite el año de ingreso del empleado");
                             Año_Ingreso= scan.nextInt();
-                            while(Año_Ingreso>1993 ^ Año_Ingreso<2023|| Nombre.equals("")){
+                            while(Año_Ingreso>1850 ^ Año_Ingreso<2023|| Nombre.equals("")){
                             System.out.println("Digite el año de ingreso del empleado");
                             Año_Ingreso = scan.nextInt();
                             }
-                            System.out.println("Digite el correo del empleado"+i);
-                            Correo= scan.nextLine() ;
+                         
                             
-                            while(Correo.equals("")){
-                            System.out.println("Digite el correo del empleado");
-                             Correo=JOptionPane.showInputDialog(null, "Digite el correo del empleado", "Correo", 1);}
                         Empleado objempleado = new Empleado (Nombre, Codigo, Apellido, Correo, Año_Ingreso);
                             listaempleados.add(objempleado);
                           
-                            System.out.println("Empleado creado");
+                            System.out.println("Empleado creado:");
                             }
-                    } 
+                            
                     
+        
                     break;
                 //Editar    
                 case 2:
@@ -269,15 +286,9 @@ public class Main2 {
                         }
                      break;
                      
+                
+                  
                 case 6:
-                  //Mostrar la lista de correos electrónicos
-                  System.out.println("***Correos***");
-                    String correos = Empleado.ConcatenarCorreos(listaempleados);
-                    System.out.println(correos);
-                  break;
-                  
-                  
-                case 7:
                      // Obtener la lista de empleados
                      ArrayList<Empleado> empleados = listaempleados;
 
@@ -291,14 +302,34 @@ public class Main2 {
                     System.out.println("El promedio de años en la empresa de los empleados es de " + promedioEdad);
 
                     break;
-                case 8:
+                    case 7:
+                  //Mostrar la lista de correos electrónicos
+                  System.out.println("***Correos***");
+                String retorno4 = ConcatenarCorreos(listaempleados);
+                JOptionPane.showMessageDialog(null, retorno4,"Informacion de"
+                        + " correos",1) ;
+                  break;
+
+                  case 8:
+                       System.out.println("Digite el codigo del empleado para calcular sus años de servicio:");
+                    scan.nextLine(); 
+                    String codigoEmpleado = scan.nextLine();
+                    int añosServicio = calcularAñosServicioIndividual(listaempleados, codigoEmpleado, año_actual);
+                    if (añosServicio != -1) {
+                        System.out.println("El empleado con código " + codigoEmpleado + " tiene " + añosServicio + " años de servicio.");
+                    } else {
+                        System.out.println("Empleado no encontrado.");
+                    }
+                    break;
+               
+                case 9:
                     //Salir
                     System.out.println("Operacion terminada con exito");
                     break;
                 default:
                     System.out.println("Opcion no valida");
                 }
-            }while(opcion!=8);
+            }while(opcion!=9);
         }
 
 public static double PromedioEdad(ArrayList<Empleado> listaempleados, int añoActual) {
@@ -317,4 +348,7 @@ public static double PromedioEdad(ArrayList<Empleado> listaempleados, int añoAc
 
     return promedioEdad;
 }
-}
+
+        }
+        
+   

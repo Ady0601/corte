@@ -93,6 +93,8 @@ public class Empleado {
 
 public static String ConcatenarCorreos(ArrayList<Empleado> listaempleados)
     {
+    
+        
         String concatenar="";
        
          for (int i = 0; i < listaempleados.size(); i++) {
@@ -117,8 +119,18 @@ public static int VerificarCodigo(ArrayList<Empleado> listaempleados, String cod
         }
         return  bandera;
     }
-  
+
+  public static int calcularAñosServicioIndividual(ArrayList<Empleado> listaempleados, String codigoEmpleado, int añoActual) {
+        for (Empleado empleado : listaempleados) {
+            if (empleado.getCodigo().equals(codigoEmpleado)) {
+                return añoActual - empleado.getAño_Ingreso();
+            }
+        }
+        return -1; 
+}
+}
+
    
-    }
+    
   
    

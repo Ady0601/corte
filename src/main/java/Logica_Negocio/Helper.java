@@ -72,6 +72,8 @@ public static int RetornarCE(String Nombre)
                     }
  return Numero;    
 }
+  
+  
 public static int RetornarCE1(String Apellido){
         int ce=0;
 
@@ -112,15 +114,60 @@ public static int RetornarCE1(String Apellido){
                     ce++;
                 }
              }
-        }
-        return ce;
-    }
+        } return ce;
+                           }
+          
 
+public static int RetornarCECorreo(String nombre){
+                    int ce=0;
+
+                        for (int j = 0; j < nombre.length(); j++) {
+                            boolean flag = Character.isLetter(nombre.charAt(j));
+                            if(!flag) {
+                            //System.out.println("'"+ nombre.charAt(j)+"' is a caracter special");
+                            
+                            if(nombre.charAt(j)=='~')
+                            {
+                                ce++;
+                            }
+                            if(nombre.charAt(j)=='/')
+                            {
+                                ce++;
+                            }
+                            if(nombre.charAt(j)==';')
+                            {
+                                ce++;
+                            }
+                            if(nombre.charAt(j)==':')
+                            {
+                                ce++;
+                            }
+                            if(nombre.charAt(j)=='"')
+                            {
+                                ce++;
+                            }
+                            if(nombre.charAt(j)=='!')
+                            {
+                                ce++;
+                            }
+                            if(nombre.charAt(j)==' ')
+                            {
+                                ce++;
+                            }
+                            
+                            }
+                            }
+                            return ce;
+}
 }
 
-    
-    
-    
-    
+                        
     
 
+
+
+
+
+             
+   
+  
